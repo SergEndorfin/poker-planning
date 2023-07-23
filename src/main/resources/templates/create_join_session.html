@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta th:replace="fragments/common/head">
+    <title>Create Session</title>
+</head>
+<body>
+<header th:insert="fragments/common/header"></header>
+<main class="content mb-5">
+    <div th:if="${sessionId}">
+        <div th:replace="fragments/session/join_session_form"></div>
+    </div>
+    <div th:unless="${sessionId}">
+        <div th:replace="fragments/session/create_session_form"></div>
+    </div>
+</main>
+<footer th:insert="fragments/common/footer"></footer>
+</body>
+</html>

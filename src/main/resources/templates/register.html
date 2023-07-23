@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta th:replace="fragments/common/head">
+    <title>Login</title>
+</head>
+<body>
+<header th:insert="fragments/common/header"></header>
+<main class="content mb-5">
+    <div class="login-container">
+        <div class="card mt-3">
+            <div class="card-header bg-transparent">
+                <h3 class="text-center">Register</h3>
+            </div>
+            <div class="card-body">
+                <form th:action="@{/register}" method="post">
+                    <div th:if="${errorMessage}" class="alert alert-danger mt-3" role="alert">
+                        <span th:text="${errorMessage}"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <input type="text" class="form-control" id="username" name="username" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="text" class="form-control" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" class="form-control" id="password" name="password" required>
+                    </div>
+                    <div class="row mt-4">
+                        <div class="col-md-12">
+                            <button type="submit" class="btn btn-success btn-block w-100">Register</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="row mt-5 align-items-center">
+            <a class="btn btn-primary btn-block" href="/login">Login</a>
+        </div>
+    </div>
+</main>
+<footer th:insert="fragments/common/footer"></footer>
+</body>
+</html>

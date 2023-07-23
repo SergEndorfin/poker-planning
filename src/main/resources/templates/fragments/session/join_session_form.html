@@ -1,0 +1,25 @@
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h5>Join Poker Planning Session</h5>
+                </div>
+                <div class="card-body">
+                    <div th:if="${sessionCreatedMsg}" class="alert alert-success mt-3" role="alert">
+                        <span th:text="${sessionCreatedMsg}"></span>
+                    </div>
+                    <form th:action="@{'/sessions/' + ${sessionId}}" method="post">
+                        <div class="mb-3">
+                            <label for="username" class="form-label">Your Name/Nickname</label>
+                            <input type="text" class="form-control" id="username" name="username" required>
+                        </div>
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-primary">Join Session</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

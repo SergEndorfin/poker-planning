@@ -1,0 +1,45 @@
+CREATE TABLE tbl_session
+(
+    id        INT PRIMARY KEY,
+    title     VARCHAR(255) NOT NULL,
+    deck_type VARCHAR(50)  NOT NULL
+);
+
+CREATE TABLE tbl_session_user
+(
+    id         INT PRIMARY KEY,
+    session_id INT,
+    username   VARCHAR(25) NOT NULL UNIQUE,
+    password   VARCHAR(50) NOT NULL,
+    FOREIGN KEY (session_id) REFERENCES tbl_session (id)
+);
+
+CREATE TABLE tbl_user_story
+(
+    id          INT PRIMARY KEY,
+    session_id  INT,
+    description TEXT        NOT NULL,
+    status      VARCHAR(50) NOT NULL,
+    FOREIGN KEY (session_id) REFERENCES tbl_session (id)
+);
+
+CREATE TABLE tbl_vote
+(
+    id            INT PRIMARY KEY,
+    user_id       INT,
+    user_story_id INT,
+    grade         INT,
+    FOREIGN KEY (user_id) REFERENCES tbl_session_user (id),
+    FOREIGN KEY (user_story_id) REFERENCES tbl_user_story (id)
+);
+
+-- Login user in case of Authentication stuff...
+CREATE TABLE tbl_user
+(
+    id         INT PRIMARY KEY,
+    session_id INT,
+    username   VARCHAR(25) NOT NULL,
+    email      VARCHAR(25) NULL UNIQUE,
+    password   VARCHAR(50) NOT NULL,
+    FOREIGN KEY (session_id) REFERENCES tbl_session (id)
+);

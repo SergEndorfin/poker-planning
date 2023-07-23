@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Start Voting - Poker Planning Session</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+<div class="container">
+    <h1>Poker Planning Session - Start Voting</h1>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>User Story ID</th>
+            <th>Description</th>
+            <th>Status</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        <tr th:each="userStory : ${session.userStories}">
+            <td th:text="${userStory.id}">User Story ID</td>
+            <td th:text="${userStory.description}">User Story Description</td>
+            <td th:text="${userStory.status}">User Story Status</td>
+            <td>
+                <!-- Display "Start" button for PENDING or VOTED stories -->
+                <button th:if="${userStory.status == 'PENDING' || userStory.status == 'VOTED'}"
+                        class="btn btn-primary"
+                        th:onclick="'startVoting(' + ${userStory.id} + ')'"
+                >Start
+                </button>
+                <!-- Hide button for other statuses -->
+                <button th:unless="${userStory.status == 'PENDING' || userStory.status == 'VOTED'}"
+                        class="btn btn-primary" disabled>Start
+                </button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <!-- Voting UI for a user story in VOTING status -->
+    <div th:if="${votingUserStory != null and votingUserStory.status == 'VOTING'}">
+        <h2>Voting for User Story: <span th:text="${votingUserStory.description}"></span></h2>
+        <div>
+            <label for="vote">Select Your Vote:</label>
+            <select id="vote" name="vote" class="form-select">
+                <option th:each="voteOption : ${voteOptions}" th:value="${voteOption}">Vote: <span
+                        th:text="${voteOption}"></span></option>
+            </select>
+        </div>
+        <button class="btn btn-primary mt-2" th:onclick="'submitVote(' + ${votingUserStory.id} + ')'">
+            Submit Vote
+        </button>
+    </div>
+</div>
+<hr>
+
+
+<!---->
+<!-- Bootstrap Modal for creating a new User Story -->
+<button class="btn btn-primary mt-3" id="addUserStoryBtn">Add User Story</button>
+<!---->
+<!-- Bootstrap Modal for creating a new User Story -->
+<div class="modal fade" id="addUserStoryModal" tabindex="-1" aria-labelledby="addUserStoryModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addUserStoryModalLabel">Add User Story</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <!-- User Story creation form -->
+                <form th:action="@{/sessions/sessionId/addUserStory}" method="post" id="userStoryForm">
+                    <div class="mb-3">
+                        <label for="userStoryId" class="form-label">User Story ID</label>
+                        <input type="text" class="form-control" id="userStoryId" name="userStoryId" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="description" class="form-label">Description</label>
+                        <textarea class="form-control" id="description" name="description" rows="3" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Create</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

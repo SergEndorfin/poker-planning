@@ -1,0 +1,29 @@
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h5>Create Poker Planning Session</h5>
+                </div>
+                <div class="card-body">
+                    <form th:action="@{/sessions}" method="post">
+                        <div class="mb-3">
+                            <label for="title" class="form-label">Session Title</label>
+                            <input type="text" class="form-control" id="title" name="title" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="deckType" class="form-label">Deck Type</label>
+                            <select class="form-select" id="deckType" name="deckType" required>
+                                <option value="T-Shirt">T-Shirt</option>
+                                <option value="Fibonacci">Fibonacci</option>
+                            </select>
+                        </div>
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-primary btn-block">Create Session</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
