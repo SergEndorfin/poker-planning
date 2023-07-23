@@ -1,22 +1,31 @@
-# POCKER PLANIN SESSION APP
+# POKER PLANING SESSION APP
+
 <hr>
-- Application created using Java 17 with Spring Boot 3.			
+- Application created using Java 17 with Spring Boot 3.		
+
 - The application design is implemented with the Bootstrap framework and Thymeleaf template.
+
 - Created an API design to cover all the detected user cases.
+
 - H2 database for persistence and simulating the interaction with a relational database is used.
+
 - Spring Boo Data JPA used for communication to DB.
 
 <hr>
 
-USER STORIES
+<hr>
 
-Feature: Session management
+> CONDITIONS:
+
+**USER STORIES**
+
+**<i>Feature: Session management</i>**
 
 Scenario: New session
 Given I want create a place to make a poker planning session
 When I type a title
 And select the deck type
-And summit the form
+And submmit the form
 Then I enter in a new poker planning session
 And I have a link to invite to other people to join
 
@@ -24,7 +33,7 @@ Scenario: Enter session
 Given I receive an invitation link to join in a poker planning session
 And I navigate to it
 When I type my name/nickname
-And summit the form
+And submmit the form
 Then I enter in the poker planning session
 And I see the title of the session
 And I able to see the user stories list to vote
@@ -38,7 +47,7 @@ And double check my intend
 Then All data are destroyed
 And I'm redirected to a confirmation page
 
-Feature: Votes management
+**<i>Feature: Votes management</i>**
 
 Scenario: Start voting a user story
 Given There are PENDING or VOTED user stories
@@ -68,7 +77,7 @@ And no more votes are accepted for the user story
 And the votes of all members are revealed
 And summary of voted values are shown in the user story
 
-Feature: User stories management
+**<i>Feature: User stories management**</i>
 
 Scenario: Add a user story
 Given I'm in as poker planning session
@@ -82,11 +91,3 @@ And I want to delete a user story
 And the user story is PENDING
 When I push the option to delete the user story
 Then the user story disappears from the user story list
-
-
-
-
-
-<hr>
-CONDITIONS:
-![img_1.png](img_1.png)
