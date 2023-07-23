@@ -1,6 +1,7 @@
 # POKER PLANING SESSION APP
 
 <hr>
+
 - Application created using Java 17 with Spring Boot 3.		
 
 - The application design is implemented with the Bootstrap framework and Thymeleaf template.
