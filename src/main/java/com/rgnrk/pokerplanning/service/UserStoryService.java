@@ -7,4 +7,6 @@ public interface UserStoryService {
     Session create(UserStory userStory, Long sessionId);
 
     void deleteUserStory(String id);
+
+    void switchStatus(String id);
 }

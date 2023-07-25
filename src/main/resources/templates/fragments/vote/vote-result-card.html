@@ -1,0 +1,20 @@
+<div th:if="${userStory != null and userStory.status.name() == 'VOTED'}">
+    <div class="card bg-light p-3 mt-0 rounded-bottom">
+        <div class="card-body d-flex justify-content-around">
+            <table class="table table-bordered">
+                <thead class="table-active">
+                <tr>
+                    <th scope="col">Username</th>
+                    <th scope="col">Grade</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="vote : ${userStory.votes}">
+                    <td th:text="${vote.user.username}"/>
+                    <td th:text="${vote.grade}"/>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

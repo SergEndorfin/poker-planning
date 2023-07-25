@@ -38,57 +38,9 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-lg-9">
-                <div class="card mb-4">
-                    <div class="card-header">
-                        <h4>User Stories to Vote</h4>
-                    </div>
-                    <!---->
-                    <table class="table">
-                        <thead>
-                        <tr>
-                            <th>User Story ID</th>
-                            <th>Description</th>
-                            <th>Status</th>
-                            <th>Action</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr th:each="userStory : ${planingSession.userStories}">
-                            <td th:text="${userStory.id}">User Story ID</td>
-                            <td th:text="${userStory.description}">User Story Description</td>
-                            <td th:text="${userStory.status}">User Story Status</td>
-                            <td>
-                                <button
-                                        onclick="startVoting(/* pass the userStory.id here */)"
-                                        th:disabled="${userStory.status.name() == 'VOTED'}"
-                                        class="btn btn-primary mb-1">Start
-                                </button>
-                                <form id="redirectForm" th:action="@{/user-stories/{id}(id=${userStory.id})}"
-                                      method="post">
-                                    <input type="hidden" id="referer" name="sessionId"
-                                           th:value="${planingSession.id}"/>
-                                    <button class="btn btn-danger">Remove</button>
-                                </form>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                    <!---->
-                </div>
-            </div>
-            <div class="col-lg-3">
-                <div class="card mb-4">
-                    <div class="card-header">
-                        <h4>Members Joined</h4>
-                    </div>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item" th:each="user : ${planingSession.users}">
-                            <span th:text="${user.username}"></span>
-                        </li>
-                    </ul>
-                </div>
-            </div>
+            <div th:replace="fragments/user-story/user-story"></div>
+
+            <div th:replace="fragments/session/session-users-card"></div>
         </div>
     </div>
 

@@ -8,6 +8,10 @@ import com.rgnrk.pokerplanning.service.UserStoryService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
+import static com.rgnrk.pokerplanning.entity.UserStoryStatus.*;
+
 @Service
 @AllArgsConstructor
 public class UserStoryServiceImpl implements UserStoryService {
@@ -27,5 +31,17 @@ public class UserStoryServiceImpl implements UserStoryService {
     @Override
     public void deleteUserStory(String id) {
         userStoryRepository.deleteById(id);
+    }
+
+    @Override
+    public void switchStatus(String id) {
+        Optional<UserStory> foundUserStory = userStoryRepository.findById(id);
+        foundUserStory.ifPresent(this::switchStatusAndSave);
+    }
+
+    private void switchStatusAndSave(UserStory userStory) {
+        var status = userStory.getStatus().equals(PENDING) ? VOTING : VOTED;
+        userStory.setStatus(status);
+        userStoryRepository.save(userStory);
     }
 }

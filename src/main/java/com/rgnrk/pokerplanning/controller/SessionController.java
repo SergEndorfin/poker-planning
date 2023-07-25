@@ -5,6 +5,7 @@ import com.rgnrk.pokerplanning.entity.SessionUser;
 import com.rgnrk.pokerplanning.service.SessionService;
 import com.rgnrk.pokerplanning.service.SessionUserService;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -40,8 +41,9 @@ public class SessionController {
     @PostMapping("{sessionId}")
     public String joinSession(@ModelAttribute SessionUser user,
                               @PathVariable Long sessionId,
+                              HttpServletRequest request,
                               RedirectAttributes redirectAttributes) {
-        var session = userService.addSessionUser(user, sessionId);
+        var session = userService.addSessionUser(user, sessionId, request.getSession());
         redirectAttributes.addFlashAttribute(PLANING_SESSION_ATR, session);
         return "redirect:/sessions/" + sessionId;
     }
@@ -49,14 +51,12 @@ public class SessionController {
     @GetMapping("{sessionId}")
     public String viewSession(@PathVariable Long sessionId,
                               Model model,
-                              HttpServletRequest request,
-                              RedirectAttributes redirectAttributes) {
-        if (isNewUser(request.getParameter("join"))) {
-            redirectAttributes.addFlashAttribute(SESSION_ID_ATR, sessionId);
-            return "redirect:/sessions/join";
+                              HttpServletRequest request) {
+        var httpSession = request.getSession();
+        if (isNewUser(request.getParameter("join"), httpSession)) {
+            return "forward:/sessions/join";
         }
         var session = model.getAttribute(PLANING_SESSION_ATR);
-
         if (Objects.isNull(session)) {
             session = sessionService.getSessionById(sessionId);
         }
@@ -66,13 +66,14 @@ public class SessionController {
     }
 
     @DeleteMapping("{sessionId}")
-    public String destroySession(@PathVariable Long sessionId) {
+    public String destroySession(@PathVariable Long sessionId, HttpServletRequest request) {
         sessionService.destroySession(sessionId);
-        //TODO: redirect to a confirmation page...
+        //TODO: redirect to a confirmation page?..
+        request.getSession().removeAttribute(PLANNING_SESSION_CURRENT_USER_ATR);
         return "redirect:/";
     }
 
-    private static boolean isNewUser(String paramValue) {
-        return "new".equals(paramValue);
+    private boolean isNewUser(String paramValue, HttpSession httpSession) {
+        return "new".equals(paramValue) || Objects.isNull(httpSession.getAttribute(PLANNING_SESSION_CURRENT_USER_ATR));
     }
 }

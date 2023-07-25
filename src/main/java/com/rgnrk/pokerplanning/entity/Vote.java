@@ -1,26 +1,38 @@
 package com.rgnrk.pokerplanning.entity;
 
 import jakarta.persistence.*;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.Objects;
+
 @Getter
 @Setter
-@EqualsAndHashCode
 @Entity(name = "tbl_vote")
 public class Vote {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private String grade;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
-    private User user;
+    private SessionUser user;
 
     @ManyToOne
     @JoinColumn(name = "user_story_id")
     private UserStory userStory;
 
-    private int grade;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Vote vote = (Vote) o;
+        return id.equals(vote.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
 }

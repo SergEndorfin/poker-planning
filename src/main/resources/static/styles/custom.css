@@ -22,3 +22,17 @@ body {
     flex-shrink: 0;
     background-color: #eeeded;
 }
+
+.rounded-top {
+    border-radius: 10px 10px 0 0;
+    overflow: hidden;
+}
+
+.rounded-bottom {
+    border-radius: 0 0 10px 10px;
+    overflow: hidden;
+}
+
+.user-stories-card {
+    background-color: #eeeded;
+}

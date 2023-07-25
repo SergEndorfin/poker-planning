@@ -10,6 +10,8 @@ public final class TemplateConstant {
     public static final String SESSION_ID_ATR = "sessionId";
     public static final String PLANING_SESSION_ATR = "planingSession";
     public static final String INVITE_URL_ATR = "inviteUrl";
+    public static final String PLANNING_SESSION_CURRENT_USER_ATR = "planningSessionCurrentUser";
+    public static final String USER_STORY_ID_ATR = "userStoryId";
 
     //Values
     public static final String SUCCESS_MSG = "Registration successful! Please log in.";

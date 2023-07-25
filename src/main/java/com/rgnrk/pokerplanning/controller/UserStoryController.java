@@ -26,11 +26,17 @@ public class UserStoryController {
         return "redirect:/sessions/" + sessionId;
     }
 
-    //    @DeleteMapping("/{userStoryId}")
-    @PostMapping("/{userStoryId}")
+    @DeleteMapping("/{userStoryId}")
     public String deleteUserStory(@PathVariable String userStoryId,
                                   @RequestParam(SESSION_ID_ATR) Long sessionId) {
         userStoryService.deleteUserStory(userStoryId);
+        return "redirect:/sessions/" + sessionId;
+    }
+
+    @PutMapping("/{userStoryId}")
+    public String switchStatus(@PathVariable String userStoryId,
+                               @RequestParam(SESSION_ID_ATR) Long sessionId) {
+        userStoryService.switchStatus(userStoryId);
         return "redirect:/sessions/" + sessionId;
     }
 }

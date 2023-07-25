@@ -1,0 +1,49 @@
+<div th:if="${userStory != null and userStory.status.name() == 'VOTING'}">
+    <div class="card bg-light p-3 mt-0 rounded-bottom">
+        <div class="card-body d-flex justify-content-around">
+            <div>
+                <h4 class="card-title mb-0">Voting started</h4>
+                <div class="mt-2">
+                    <p>Emitted votes: <span th:text="${userStory.votes.size()}">Count</span></p>
+                </div>
+            </div>
+            <div class="mx-5">
+                <form th:action="@{/votes}" method="post" id="vote-form">
+                    <input type="hidden" th:name="userStoryId" th:value="${userStory.id}"/>
+                    <label for="vote">Select Your Vote:</label>
+                    <div th:switch="${planingSession.deckType}">
+                        <select th:case="'Fibonacci'" name="grade" id="vote" class="form-select">
+                            <option th:value="1" th:text="1"></option>
+                            <option th:value="2" th:text="2"></option>
+                            <option th:value="3" th:text="3"></option>
+                            <option th:value="5" th:text="5"></option>
+                            <option th:value="8" th:text="8"></option>
+                            <option th:value="13" th:text="13"></option>
+                        </select>
+                        <select th:case="'T-Shirt'" name="grade" id="vote" class="form-select">
+                            <option th:value="XS" th:text="XS"></option>
+                            <option th:value="S" th:text="S"></option>
+                            <option th:value="M" th:text="M"></option>
+                            <option th:value="L" th:text="L"></option>
+                            <option th:value="XL" th:text="XL"></option>
+                            <option th:value="XXL" th:text="XXL"></option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+            <form th:action="@{/user-stories/{id}(id=${userStory.id})}" th:method="put" id="stop-vote-form">
+                <input type="hidden" name="sessionId" th:value="${planingSession.id}"/>
+            </form>
+            <div class="pt-3">
+                <button class="btn btn-outline-primary btn-sm my-1" form="vote-form">Submit Vote</button>
+                <button class="btn btn-outline-warning btn-sm" form="stop-vote-form">Stop Voting</button>
+            </div>
+        </div>
+        <hr>
+        <p>Emitted users:
+            <b th:each="vote : ${userStory.votes}">
+                <span th:text="${vote.user.username} + '; '"></span>
+            </b>
+        </p>
+    </div>
+</div>

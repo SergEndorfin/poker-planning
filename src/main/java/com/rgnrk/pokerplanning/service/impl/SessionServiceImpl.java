@@ -1,6 +1,7 @@
 package com.rgnrk.pokerplanning.service.impl;
 
 import com.rgnrk.pokerplanning.entity.Session;
+import com.rgnrk.pokerplanning.exception.SessionNotFoundException;
 import com.rgnrk.pokerplanning.repository.SessionRepository;
 import com.rgnrk.pokerplanning.service.SessionService;
 import lombok.AllArgsConstructor;
@@ -19,7 +20,9 @@ public class SessionServiceImpl implements SessionService {
 
     @Override
     public Session getSessionById(Long sessionId) {
-        return sessionRepository.findSessionWithUsersAndUserStories(sessionId);
+        return sessionRepository
+                .findSessionWithUsersAndUserStories(sessionId)
+                .orElseThrow(() -> new SessionNotFoundException(sessionId));
     }
 
     @Override

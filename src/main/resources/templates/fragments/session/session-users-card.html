@@ -1,0 +1,12 @@
+<div class="col-lg-3">
+    <div class="card mb-4">
+        <div class="card-header">
+            <h4>Members Joined</h4>
+        </div>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item" th:each="user : ${planingSession.users}">
+                <span th:text="${user.username}"></span>
+            </li>
+        </ul>
+    </div>
+</div>
