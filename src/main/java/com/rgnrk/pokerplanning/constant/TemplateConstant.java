@@ -15,7 +15,8 @@ public final class TemplateConstant {
 
     //Values
     public static final String SUCCESS_MSG = "Registration successful! Please log in.";
-    public static final String ERROR_MSG = "User not registered. Email should be unique.";
+    public static final String UNIQUE_EMAIL_ERROR_MSG = "User not registered. Email should be unique.";
+    public static final String UNIQUE_USERNAME_ERROR_MSG = "Username should be unique. Try new one.";
     public static final String SESSION_CREATED_MSG = "Session created successfully. Now you can join it.";
 
     private TemplateConstant() {

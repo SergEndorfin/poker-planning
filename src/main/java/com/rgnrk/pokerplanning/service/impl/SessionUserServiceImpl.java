@@ -7,6 +7,7 @@ import com.rgnrk.pokerplanning.service.SessionService;
 import com.rgnrk.pokerplanning.service.SessionUserService;
 import jakarta.servlet.http.HttpSession;
 import lombok.AllArgsConstructor;
+import org.slf4j.Logger;
 import org.springframework.stereotype.Service;
 
 import java.util.Set;
@@ -19,15 +20,21 @@ public class SessionUserServiceImpl implements SessionUserService {
 
     private final SessionUserRepository userRepository;
     private final SessionService sessionService;
+    private final Logger logger;
+
+    @Override
+    public boolean isUsernameNotUnique(String username, Long sessionId) {
+        return userRepository.findByUsernameAndSessionId(username, sessionId).isPresent();
+    }
 
     @Override
     public Session addSessionUser(SessionUser user, Long sessionId, HttpSession httpSession) {
         var session = sessionService.getSessionById(sessionId);
         user.setSession(session);
-        var savedSessionUser = userRepository.save(user);
         Set<SessionUser> users = session.getUsers();
-        users.add(savedSessionUser);
-        httpSession.setAttribute(PLANNING_SESSION_CURRENT_USER_ATR, savedSessionUser);
+        users.add(userRepository.save(user));
+        httpSession.setAttribute(PLANNING_SESSION_CURRENT_USER_ATR, userRepository.save(user));
+        logger.debug("New Session User created and added to session.");
         return session;
     }
 }

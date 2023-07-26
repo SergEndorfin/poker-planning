@@ -6,6 +6,7 @@ import com.rgnrk.pokerplanning.exception.SessionNotFoundException;
 import com.rgnrk.pokerplanning.repository.SessionRepository;
 import com.rgnrk.pokerplanning.service.SessionService;
 import lombok.AllArgsConstructor;
+import org.slf4j.Logger;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,6 +16,7 @@ import java.util.TreeSet;
 @AllArgsConstructor
 public class SessionServiceImpl implements SessionService {
 
+    private final Logger logger;
     private final SessionRepository sessionRepository;
 
     @Override
@@ -24,6 +26,7 @@ public class SessionServiceImpl implements SessionService {
 
     @Override
     public Session getSessionById(Long sessionId) {
+        logger.debug("Retrieving Session by id.");
         return sessionRepository
                 .findSessionWithUsersAndUserStories(sessionId)
                 .map(session -> {
@@ -37,6 +40,7 @@ public class SessionServiceImpl implements SessionService {
     @Override
     public void destroySession(Long sessionId) {
         sessionRepository.deleteById(sessionId);
+        logger.info("Session with id {} removed.", sessionId);
     }
 
     private List<UserStory> getStoriesWithSortedVotes(Session session) {

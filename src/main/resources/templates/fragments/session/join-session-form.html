@@ -9,6 +9,9 @@
                     <div th:if="${sessionCreatedMsg}" class="alert alert-success mt-3" role="alert">
                         <span th:text="${sessionCreatedMsg}"></span>
                     </div>
+                    <div th:if="${errorMessage}" class="alert alert-danger mt-3" role="alert">
+                        <span th:text="${errorMessage}"></span>
+                    </div>
                     <form th:action="@{'/sessions/' + ${sessionId}}" method="post">
                         <div class="mb-3">
                             <label for="username" class="form-label">Your Name/Nickname</label>

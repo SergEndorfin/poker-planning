@@ -11,8 +11,14 @@
         <div class="mt-3 mb-1">
             <div class="row align-items-center justify-content-between">
                 <div class="col-auto">
-                    <p class="mb-0">Invitation URL:</p>
-                    <p><a th:href="${inviteUrl}" target="_blank"><span th:text="${inviteUrl}"></span></a></p>
+                    <p class="mb-0">Invitation URL:
+                        <button id="copyUrlButton" class="btn btn-outline-success mx-2" data-bs-toggle="tooltip"
+                                data-bs-placement="top" title="Copy URL">Copy URL
+                        </button>
+                    </p>
+                    <p><a th:href="${inviteUrl}" target="_blank" th:data-clipboard-text="${inviteUrl}">
+                        <span th:text="${inviteUrl}" id="inviteUrl"></span>
+                    </a></p>
                 </div>
                 <div class="col-auto">
                     <button class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#addUserStoryModal">
@@ -58,5 +64,6 @@
 <!--The scripts that allows to check the content periodically.-->
 <script th:src="@{/js/jquery-3.7.0.min.js}"></script>
 <script th:src="@{/js/check_for_updates.js}" type="text/javascript"></script>
+<script th:src="@{/js/copy_url.js}" type="text/javascript"></script>
 </body>
 </html>

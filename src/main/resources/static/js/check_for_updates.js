@@ -1,6 +1,6 @@
 const contentElementId = 'current-planning-session-data';
 const sessionId = window.location.pathname.split('/').pop();
-console.log('sessionId: ', sessionId)
+let intervalId;
 
 function calculateHashCode(str) {
     let hash = 0;
@@ -13,7 +13,6 @@ function calculateHashCode(str) {
 }
 
 function checkForUpdates() {
-    console.log('----------------')
     $.ajax({
         url: '/sessions/' + sessionId,
         method: 'GET',
@@ -25,11 +24,7 @@ function checkForUpdates() {
             const responseContentHash = calculateHashCode(responseContent);
             const currentContentHash = calculateHashCode(document.getElementById(contentElementId).innerHTML);
 
-            console.log("currentContentHash: ", currentContentHash);
-            console.log("responseContentHash: ", responseContentHash);
-
             if (responseContentHash !== currentContentHash) {
-                console.log('>>> CONTENT CHANGED !!!')
                 document.getElementById(contentElementId).innerHTML = responseContent;
             }
         },
@@ -37,8 +32,21 @@ function checkForUpdates() {
             console.error('Error fetching updates:', error);
         }
     });
-    console.log('-------+---------')
-    console.log('---------+-------')
 }
 
-setInterval(checkForUpdates, 1500);
+function startCheckingForUpdates() {
+    intervalId = setInterval(checkForUpdates, 2000);
+}
+
+function stopCheckingForUpdates() {
+    clearInterval(intervalId);
+}
+
+window.onload = function () {
+    // Call the startCheckingForUpdates function when the page is loaded
+    startCheckingForUpdates();
+    window.addEventListener('beforeunload', function () {
+        // Call the stopCheckingForUpdates function when the user leaves the page
+        stopCheckingForUpdates();
+    });
+};

@@ -31,7 +31,7 @@ public class RegisterController {
             redirectAttributes.addFlashAttribute(SUCCESS_MSG_ATR, SUCCESS_MSG);
             return "redirect:/login";
         } else {
-            model.addAttribute(ERROR_MSG_ATR, ERROR_MSG);
+            model.addAttribute(ERROR_MSG_ATR, UNIQUE_EMAIL_ERROR_MSG);
             return "register";
         }
     }

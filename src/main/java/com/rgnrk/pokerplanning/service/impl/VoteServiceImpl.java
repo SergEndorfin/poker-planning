@@ -9,6 +9,7 @@ import com.rgnrk.pokerplanning.service.SessionService;
 import com.rgnrk.pokerplanning.service.VoteService;
 import jakarta.servlet.http.HttpSession;
 import lombok.AllArgsConstructor;
+import org.slf4j.Logger;
 import org.springframework.stereotype.Service;
 
 import java.util.function.Consumer;
@@ -21,6 +22,7 @@ public class VoteServiceImpl implements VoteService {
 
     private final VoteRepository voteRepository;
     private final SessionService sessionService;
+    private final Logger logger;
 
     @Override
     public Session addVote(String grade, String storyId, HttpSession httpSession) {
@@ -31,6 +33,7 @@ public class VoteServiceImpl implements VoteService {
                 .filter(story -> storyId.equals(story.getId()))
                 .findAny()
                 .ifPresent(createAndAddVote(grade, storyId, user));
+        logger.debug("Vote created and added to Story with id: {}", storyId);
         return session;
     }
 

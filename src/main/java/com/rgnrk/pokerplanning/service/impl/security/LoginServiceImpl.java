@@ -1,4 +1,4 @@
-package com.rgnrk.pokerplanning.service.impl;
+package com.rgnrk.pokerplanning.service.impl.security;
 
 import com.rgnrk.pokerplanning.dto.security.LoggedUserDto;
 import com.rgnrk.pokerplanning.dto.security.UserDto;

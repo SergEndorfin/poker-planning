@@ -43,6 +43,11 @@ public class SessionController {
                               @PathVariable Long sessionId,
                               HttpServletRequest request,
                               RedirectAttributes redirectAttributes) {
+        if (userService.isUsernameNotUnique(user.getUsername(), sessionId)) {
+            redirectAttributes.addFlashAttribute(ERROR_MSG_ATR, UNIQUE_USERNAME_ERROR_MSG);
+            redirectAttributes.addFlashAttribute(SESSION_ID_ATR, sessionId);
+            return "redirect:/sessions/join";
+        }
         var session = userService.addSessionUser(user, sessionId, request.getSession());
         redirectAttributes.addFlashAttribute(PLANING_SESSION_ATR, session);
         return "redirect:/sessions/" + sessionId;
