@@ -1,6 +1,6 @@
 package com.rgnrk.pokerplanning.controller;
 
-import com.rgnrk.pokerplanning.dto.UserDto;
+import com.rgnrk.pokerplanning.dto.security.UserDto;
 import com.rgnrk.pokerplanning.service.LoginService;
 import jakarta.servlet.http.HttpSession;
 import lombok.AllArgsConstructor;

@@ -9,7 +9,7 @@ import java.util.Objects;
 @Getter
 @Setter
 @Entity(name = "tbl_vote")
-public class Vote {
+public class Vote implements Comparable<Vote> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -34,5 +34,10 @@ public class Vote {
     @Override
     public int hashCode() {
         return Objects.hash(id);
+    }
+
+    @Override
+    public int compareTo(Vote other) {
+        return Long.compare(this.id, other.id);
     }
 }

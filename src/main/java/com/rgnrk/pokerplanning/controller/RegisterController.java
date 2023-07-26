@@ -1,6 +1,6 @@
 package com.rgnrk.pokerplanning.controller;
 
-import com.rgnrk.pokerplanning.dto.UserDto;
+import com.rgnrk.pokerplanning.dto.security.UserDto;
 import com.rgnrk.pokerplanning.service.RegisterService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta th:replace="fragments/common/head">
+    <title>Error Page</title>
+</head>
+<body>
+<header th:insert="fragments/common/header"></header>
+<main class="content  mb-5">
+    <div class="container">
+        <h1>Error</h1>
+        <p th:text="${errorMessage}"></p>
+        <div>
+            <a href="/" class="btn btn-primary">Home</a>
+            <a href="/sessions/create" class="btn btn-success">Create Session</a>
+        </div>
+    </div>
+</main>
+<footer th:insert="fragments/common/footer"></footer>
+</body>
+</html>

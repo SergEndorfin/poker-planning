@@ -8,10 +8,10 @@
 <header th:insert="fragments/common/header"></header>
 <main class="content mb-5">
     <div th:if="${sessionId}">
-        <div th:replace="fragments/session/join_session_form"></div>
+        <div th:replace="fragments/session/join-session-form"></div>
     </div>
     <div th:unless="${sessionId}">
-        <div th:replace="fragments/session/create_session_form"></div>
+        <div th:replace="fragments/session/create-session-form"></div>
     </div>
 </main>
 <footer th:insert="fragments/common/footer"></footer>

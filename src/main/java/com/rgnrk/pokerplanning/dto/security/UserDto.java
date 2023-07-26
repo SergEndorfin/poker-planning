@@ -1,4 +1,4 @@
-package com.rgnrk.pokerplanning.dto;
+package com.rgnrk.pokerplanning.dto.security;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

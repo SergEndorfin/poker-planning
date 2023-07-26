@@ -1,6 +1,6 @@
 package com.rgnrk.pokerplanning.repository;
 
-import com.rgnrk.pokerplanning.entity.User;
+import com.rgnrk.pokerplanning.entity.security.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

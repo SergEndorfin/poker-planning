@@ -1,8 +1,8 @@
-package com.rgnrk.pokerplanning.util;
+package com.rgnrk.pokerplanning.util.secutiry;
 
-import com.rgnrk.pokerplanning.dto.LoggedUserDto;
-import com.rgnrk.pokerplanning.dto.UserDto;
-import com.rgnrk.pokerplanning.entity.User;
+import com.rgnrk.pokerplanning.dto.security.LoggedUserDto;
+import com.rgnrk.pokerplanning.dto.security.UserDto;
+import com.rgnrk.pokerplanning.entity.security.User;
 import org.springframework.stereotype.Component;
 
 @Component

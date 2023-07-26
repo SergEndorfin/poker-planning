@@ -1,12 +1,12 @@
 package com.rgnrk.pokerplanning.service.impl;
 
-import com.rgnrk.pokerplanning.dto.LoggedUserDto;
-import com.rgnrk.pokerplanning.dto.UserDto;
-import com.rgnrk.pokerplanning.entity.User;
+import com.rgnrk.pokerplanning.dto.security.LoggedUserDto;
+import com.rgnrk.pokerplanning.dto.security.UserDto;
+import com.rgnrk.pokerplanning.entity.security.User;
 import com.rgnrk.pokerplanning.exception.UserNotFoundException;
 import com.rgnrk.pokerplanning.repository.UserRepository;
 import com.rgnrk.pokerplanning.service.LoginService;
-import com.rgnrk.pokerplanning.util.UserDtoUtil;
+import com.rgnrk.pokerplanning.util.secutiry.UserDtoUtil;
 import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
 import org.springframework.stereotype.Service;

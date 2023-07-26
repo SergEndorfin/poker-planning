@@ -26,7 +26,7 @@ public class SessionController {
 
     @GetMapping({"create", "join"})
     public String showCreateSessionForm() {
-        return "create_join_session";
+        return "create-join-session";
     }
 
     @PostMapping
@@ -35,7 +35,7 @@ public class SessionController {
         var createdSession = sessionService.createSession(planingSession);
         model.addAttribute(SESSION_ID_ATR, createdSession.getId());
         model.addAttribute(SESSION_CREATED_MSG_ATR, SESSION_CREATED_MSG);
-        return "create_join_session";
+        return "create-join-session";
     }
 
     @PostMapping("{sessionId}")
@@ -62,7 +62,7 @@ public class SessionController {
         }
         model.addAttribute(PLANING_SESSION_ATR, session);
         model.addAttribute(INVITE_URL_ATR, request.getRequestURL().append("?join=new"));
-        return "view_session";
+        return "view-session";
     }
 
     @DeleteMapping("{sessionId}")

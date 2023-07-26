@@ -9,6 +9,8 @@ import jakarta.servlet.http.HttpSession;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Set;
+
 import static com.rgnrk.pokerplanning.constant.TemplateConstant.PLANNING_SESSION_CURRENT_USER_ATR;
 
 @Service
@@ -23,7 +25,8 @@ public class SessionUserServiceImpl implements SessionUserService {
         var session = sessionService.getSessionById(sessionId);
         user.setSession(session);
         var savedSessionUser = userRepository.save(user);
-        session.getUsers().add(savedSessionUser);
+        Set<SessionUser> users = session.getUsers();
+        users.add(savedSessionUser);
         httpSession.setAttribute(PLANNING_SESSION_CURRENT_USER_ATR, savedSessionUser);
         return session;
     }

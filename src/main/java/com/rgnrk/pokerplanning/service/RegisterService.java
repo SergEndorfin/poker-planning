@@ -1,7 +1,7 @@
 package com.rgnrk.pokerplanning.service;
 
-import com.rgnrk.pokerplanning.dto.UserDto;
-import com.rgnrk.pokerplanning.entity.User;
+import com.rgnrk.pokerplanning.dto.security.UserDto;
+import com.rgnrk.pokerplanning.entity.security.User;
 
 import java.util.Optional;
 

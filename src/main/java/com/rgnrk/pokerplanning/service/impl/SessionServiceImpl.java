@@ -1,11 +1,15 @@
 package com.rgnrk.pokerplanning.service.impl;
 
 import com.rgnrk.pokerplanning.entity.Session;
+import com.rgnrk.pokerplanning.entity.UserStory;
 import com.rgnrk.pokerplanning.exception.SessionNotFoundException;
 import com.rgnrk.pokerplanning.repository.SessionRepository;
 import com.rgnrk.pokerplanning.service.SessionService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.TreeSet;
 
 @Service
 @AllArgsConstructor
@@ -22,6 +26,11 @@ public class SessionServiceImpl implements SessionService {
     public Session getSessionById(Long sessionId) {
         return sessionRepository
                 .findSessionWithUsersAndUserStories(sessionId)
+                .map(session -> {
+                    session.setUsers(new TreeSet<>(session.getUsers()));
+                    session.setUserStories(new TreeSet<>(getStoriesWithSortedVotes(session)));
+                    return session;
+                })
                 .orElseThrow(() -> new SessionNotFoundException(sessionId));
     }
 
@@ -29,4 +38,12 @@ public class SessionServiceImpl implements SessionService {
     public void destroySession(Long sessionId) {
         sessionRepository.deleteById(sessionId);
     }
+
+    private List<UserStory> getStoriesWithSortedVotes(Session session) {
+        return session.getUserStories()
+                .stream()
+                .peek(userStory -> userStory.setVotes(new TreeSet<>(userStory.getVotes())))
+                .toList();
+    }
 }
+

@@ -3,7 +3,6 @@
 <head>
     <meta th:replace="fragments/common/head">
     <title>Poker Planning Session</title>
-    <script th:src="@{/js/delete_session.js}"></script>
 </head>
 <body>
 <header th:insert="fragments/common/header"></header>
@@ -37,7 +36,7 @@
                 </div>
             </div>
         </div>
-        <div class="row">
+        <div class="row" id="current-planning-session-data">
             <div th:replace="fragments/user-story/user-story"></div>
 
             <div th:replace="fragments/session/session-users-card"></div>
@@ -45,9 +44,19 @@
     </div>
 
     <!-- Creating a new User Story pop-up form-->
-    <div th:include="/fragments/user-story/create_story_form"></div>
+    <div th:include="/fragments/user-story/create-story-form"></div>
+
+    <div id="planingSessionData" data-planing-session="${planingSession}"></div>
+
 </main>
 <footer th:insert="fragments/common/footer"></footer>
+
+<!--JS: -->
+<script th:src="@{/js/delete_session.js}"></script>
+<!--The script allows to open User Story pop-up form.-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.min.js"></script>
+<!--The scripts that allows to check the content periodically.-->
+<script th:src="@{/js/jquery-3.7.0.min.js}"></script>
+<script th:src="@{/js/check_for_updates.js}" type="text/javascript"></script>
 </body>
 </html>

@@ -4,7 +4,7 @@
 
 - Application created using Java 17 with Spring Boot 3.		
 
-- The application design is implemented with the Bootstrap framework and Thymeleaf template.
+- The application design is implemented with the Bootstrap framework and Thymeleaf templates + Spring MVC.
 
 - Created an API design to cover all the detected user cases.
 

@@ -9,7 +9,7 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode
 @Entity(name = "tbl_session_user")
-public class SessionUser {
+public class SessionUser implements Comparable<SessionUser> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,5 +19,10 @@ public class SessionUser {
     @ManyToOne
     @JoinColumn(name = "session_id")
     private Session session;
+
+    @Override
+    public int compareTo(SessionUser other) {
+        return Long.compare(this.id, other.id);
+    }
 }
 
