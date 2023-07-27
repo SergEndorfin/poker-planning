@@ -43,8 +43,8 @@ public class VoteServiceImpl implements VoteService {
             vote.setGrade(grade);
             vote.setUser(user);
             vote.setUserStory(story);
-            var savedVote = voteRepository.save(vote);
-            story.getVotes().add(savedVote);
+            vote = voteRepository.save(vote);
+            story.getVotes().add(vote);
         };
     }
 

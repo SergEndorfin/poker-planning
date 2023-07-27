@@ -8,11 +8,12 @@
                 </div>
             </div>
             <div class="mx-5">
-                <form th:action="@{/votes}" method="post" id="vote-form">
+                <form th:action="@{/votes}" method="post" th:id="${'vote-form-' + userStory.id}">
                     <input type="hidden" th:name="userStoryId" th:value="${userStory.id}"/>
-                    <label for="vote">Select Your Vote:</label>
+                    <label th:for="${'grade-' + userStory.id}">Select Your Grade:</label>
                     <div th:switch="${planingSession.deckType}">
-                        <select th:case="'Fibonacci'" name="grade" id="vote" class="form-select">
+                        <select th:case="'Fibonacci'" name="grade" th:id="${'grade-' + userStory.id}"
+                                class="form-select">
                             <option th:value="1" th:text="1"></option>
                             <option th:value="2" th:text="2"></option>
                             <option th:value="3" th:text="3"></option>
@@ -20,7 +21,7 @@
                             <option th:value="8" th:text="8"></option>
                             <option th:value="13" th:text="13"></option>
                         </select>
-                        <select th:case="'T-Shirt'" name="grade" id="vote" class="form-select">
+                        <select th:case="'T-Shirt'" name="grade" th:id="${'grade-' + userStory.id}" class="form-select">
                             <option th:value="XS" th:text="XS"></option>
                             <option th:value="S" th:text="S"></option>
                             <option th:value="M" th:text="M"></option>
@@ -31,12 +32,17 @@
                     </div>
                 </form>
             </div>
-            <form th:action="@{/user-stories/{id}(id=${userStory.id})}" th:method="put" id="stop-vote-form">
+            <form th:action="@{/user-stories/{id}(id=${userStory.id})}" th:method="put"
+                  th:id="${'stop-vote-form-' + userStory.id}">
                 <input type="hidden" name="sessionId" th:value="${planingSession.id}"/>
             </form>
             <div class="pt-3">
-                <button class="btn btn-outline-primary btn-sm my-1" form="vote-form">Submit Vote</button>
-                <button class="btn btn-outline-warning btn-sm" form="stop-vote-form">Stop Voting</button>
+                <button class="btn btn-outline-primary btn-sm my-1" th:form="${'vote-form-' + userStory.id}">
+                    Submit Vote
+                </button>
+                <button class="btn btn-outline-warning btn-sm" th:form="${'stop-vote-form-' + userStory.id}">
+                    Stop Voting
+                </button>
             </div>
         </div>
         <hr>

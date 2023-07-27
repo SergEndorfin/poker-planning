@@ -5,7 +5,7 @@
     <title>Create Session</title>
 </head>
 <body>
-<header th:insert="fragments/common/header"></header>
+<header th:replace="fragments/common/header"></header>
 <main class="content mb-5">
     <div th:if="${sessionId != null or errorMessage != null}">
         <div th:replace="fragments/session/join-session-form"></div>

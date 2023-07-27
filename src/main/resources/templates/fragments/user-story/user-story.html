@@ -14,33 +14,31 @@
                 </tr>
                 </thead>
                 <tbody>
-                <div class="col">
-                    <tr>
-                        <td th:text="${userStory.id}">User Story ID</td>
-                        <td th:text="${userStory.description}">User Story Description</td>
-                        <td th:text="${userStory.status}"
-                            th:class="${userStory.status.name() == 'PENDING' ? '' : (userStory.status.name() == 'VOTED' ? 'text-success' : 'text-warning')}">
-                            User Story Status
-                        </td>
-                        <td>
-                            <div th:if="${userStory.status.name() == 'PENDING'}">
-                                <form th:action="@{/user-stories/{id}(id=${userStory.id})}" th:method="put">
-                                    <input type="hidden" name="sessionId" th:value="${planingSession.id}"/>
-                                    <button class="btn btn-primary btn-sm mb-1">Start</button>
-                                </form>
-                            </div>
-                            <form th:action="@{/user-stories/{id}(id=${userStory.id})}" th:method="delete">
+                <tr>
+                    <td th:text="${userStory.id}">User Story ID</td>
+                    <td th:text="${userStory.description}">User Story Description</td>
+                    <td th:text="${userStory.status}"
+                        th:class="${userStory.status.name() == 'PENDING' ? '' : (userStory.status.name() == 'VOTED' ? 'text-success' : 'text-warning')}">
+                        User Story Status
+                    </td>
+                    <td>
+                        <div th:if="${userStory.status.name() == 'PENDING'}">
+                            <form th:action="@{/user-stories/{id}(id=${userStory.id})}" th:method="put">
                                 <input type="hidden" name="sessionId" th:value="${planingSession.id}"/>
-                                <button class="btn btn-danger btn-sm">Remove</button>
+                                <button class="btn btn-primary btn-sm mb-1">Start</button>
                             </form>
-                        </td>
-                    </tr>
-                </div>
+                        </div>
+                        <form th:action="@{/user-stories/{id}(id=${userStory.id})}" th:method="delete">
+                            <input type="hidden" name="sessionId" th:value="${planingSession.id}"/>
+                            <button class="btn btn-danger btn-sm">Remove</button>
+                        </form>
+                    </td>
+                </tr>
                 </tbody>
             </table>
 
-            <div th:insert="fragments/vote/vote-card"></div>
-            <div th:insert="fragments/vote/vote-result-card"></div>
+            <div th:replace="fragments/vote/vote-card"></div>
+            <div th:replace="fragments/vote/vote-result-card"></div>
         </div>
     </div>
 </div>
